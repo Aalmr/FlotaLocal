@@ -58,6 +58,14 @@ public class Juego {
 		private JLabel estado = null;       // Texto en el panel de estado
 		private JButton buttons[][] = null; // Botones asociados a las casillas de la partida
 
+		private JMenuBar barra;
+		private JMenu menu;
+		private JMenuItem muestraSol,nuevaPartida,salir;
+
+		private JLabel coordH;
+		private String letras = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
+
+		private JPanel panelTablero;
 		/**
          * Constructor de una tablero dadas sus dimensiones
          */
@@ -76,14 +84,24 @@ public class Juego {
 			anyadeGrid(numFilas, numColumnas);		
 			anyadePanelEstado("Intentos: " + disparos + "    Barcos restantes: " + quedan);		
 			frame.setSize(300, 300);
-			frame.setVisible(true);	
+			frame.setVisible(true);
 		} // end dibujaTablero
 
 		/**
 		 * Anyade el menu de opciones del juego y le asocia un escuchador
 		 */
 		private void anyadeMenu() {
-            // POR IMPLEMENTAR
+			barra=new JMenuBar();
+			menu=new JMenu("Opciones");
+			frame.setJMenuBar(barra);
+			barra.add(menu);
+			muestraSol=new JMenuItem("Mostrar solución");
+			nuevaPartida=new JMenuItem("Nueva Partida");
+			salir=new JMenuItem("Salir");
+			menu.add(muestraSol);
+			menu.add(nuevaPartida);
+			menu.add(salir);
+			//FALTA ASOCIAR ESCUCHADOR
 		} // end anyadeMenu
 
 		/**
@@ -92,8 +110,25 @@ public class Juego {
 		 * @param nf	numero de filas
 		 * @param nc	numero de columnas
 		 */
+
 		private void anyadeGrid(int nf, int nc) {
-            // POR IMPLEMENTAR
+			panelTablero = new JPanel();
+			panelTablero.setLayout(new GridLayout(nf+1,nc+2));
+			buttons = new JButton[nf][nc];
+			panelTablero.add(new JLabel(""));
+			for (int i=1;i<=nc;i++){
+				panelTablero.add(new JLabel(""+i));
+			}
+			panelTablero.add(new JLabel(""));
+			for (int i=0;i<nf;i++){
+				panelTablero.add(new JLabel(""+letras.charAt(i)));
+				for (int j=0;j<nc;j++){
+					buttons[i][j]=new JButton();
+					panelTablero.add(buttons[i][j]);
+				}
+				panelTablero.add(new JLabel(""+letras.charAt(i)));
+			}
+			frame.add(panelTablero,BorderLayout.CENTER);
 		} // end anyadeGrid
 
 
