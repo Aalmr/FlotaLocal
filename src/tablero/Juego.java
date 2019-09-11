@@ -101,7 +101,7 @@ public class Juego {
 			menu.add(muestraSol);
 			menu.add(nuevaPartida);
 			menu.add(salir);
-			//FALTA ASOCIAR ESCUCHADOR
+			//TODO FALTA ASOCIAR ESCUCHADOR
 		} // end anyadeMenu
 
 		/**

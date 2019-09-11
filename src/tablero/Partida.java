@@ -49,10 +49,53 @@ public class Partida {
 	 * @param   c   columna de la casilla
 	 * @return		resultado de marcar la casilla: AGUA, ya TOCADO, ya HUNDIDO, identidad del barco recien hundido
 	 */	
+	
+	//TODO Comprobar método y se puede sintetizar
     public int pruebaCasilla(int f, int c) {
-        // POR IMPLEMENTAR
-    	return 0;
+    	
+    	disparos++;
+    	if(mar[f][c]<0) return mar[f][c];
+    	
+       	for(Barco barco : barcos) {
+       		if(barco.getFilaInicial()==f || barco.getColumnaInicial()==c) {		// Comprobamos si es el barco que buscamos
+	       		int talla=0;
+	       		int col;
+	       		int fil;
+	       		
+	    		char orienta = barco.getOrientacion();
+	
+	       		fil=barco.getFilaInicial();
+	       		col = barco.getColumnaInicial();
+	       		
+	       		talla=0;
+	       		while(talla<=barco.getTamanyo()) {
+	       			if(col==c && fil==f) {
+	       				mar[f][c]=-1;
+	       				barco.tocaBarco();
+	       				if(barco.getTocadas()!=barco.getTamanyo()) return -1;
+	       			}
+	       			talla++;
+	       			if(orienta == 'h') col++;
+	   				else fil++;
+	       			
+	       		}
+	       		
+				int cIni=barco.getFilaInicial();
+				int fIni = barco.getFilaInicial();
+				talla=0;
+				while(talla<=barco.getTamanyo()) {
+					mar[cIni][fIni]=-2; // Está hundido
+					talla++;
+					if(barco.getOrientacion()=='h') cIni++;
+					else fIni++;
+				}
+				return -2;
+       		}
+		}
+		return 0;
+      	
     }
+    
     
 
 	/**
@@ -62,17 +105,22 @@ public class Partida {
 	 * @return	        cadena con los datos del barco
 	 */	
 	public String getBarco(int idBarco) {
-        // POR IMPLEMENTAR
-		return null;
+        
+		return barcos.get(idBarco).toString();
 	}
 	
 	/**
 	 * Devuelve un vector de cadenas con los datos de todos los barcos
 	 * @return	vector de cadenas, una por barco con la informacion de getBarco
 	 */	
+	
+	// TODO Comprobar si es eto lo que hay que hacer
 	public String[] getSolucion() {
-        // POR IMPLEMENTAR
-		return null;
+        String[] vBarco= new String[barcos.size()];
+		for(int i =0; i<vBarco.length;i++) {
+			vBarco[i]=getBarco(i);
+		}
+		return vBarco;
 	}
     
 
