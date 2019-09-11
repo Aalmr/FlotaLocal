@@ -77,7 +77,6 @@ public class Partida {
 	       			talla++;
 	       			if(orienta == 'h') col++;
 	   				else fil++;
-	       			
 	       		}
 	       		
 				int cIni=barco.getFilaInicial();
