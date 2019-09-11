@@ -51,11 +51,19 @@ public class Partida {
 	 */	
 	
 	//TODO Comprobar método y se puede sintetizar
+
     public int pruebaCasilla(int f, int c) {
-    	
     	disparos++;
     	if(mar[f][c]<0) return mar[f][c];
-    	
+		int arr, aba, izq, der;
+		arr = (f==0)?-1:mar[f-1][c];
+		aba = (f==7)?-1:mar[f+1][c];
+		izq = (c==0)?-1:mar[f][c-1];
+		der = (c==7)?-1:mar[f][c+1];
+    	if (arr*aba*izq*der<0) return -2;
+    	if (izq*arr<0) return -2;
+    	return -3;
+    	/*
        	for(Barco barco : barcos) {
        		if(barco.getFilaInicial()==f || barco.getColumnaInicial()==c) {		// Comprobamos si es el barco que buscamos
 	       		int talla=0;
@@ -91,8 +99,7 @@ public class Partida {
 				return -2;
        		}
 		}
-		return 0;
-      	
+		*/
     }
     
     
