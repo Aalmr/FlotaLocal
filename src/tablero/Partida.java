@@ -57,11 +57,13 @@ public class Partida {
     	if(mar[f][c]<0) return mar[f][c];
 		int arr, aba, izq, der;
 		arr = (f==0)?-1:mar[f-1][c];
-		aba = (f==7)?-1:mar[f+1][c];
+		aba = (f==numFilas)?-1:mar[f+1][c];
 		izq = (c==0)?-1:mar[f][c-1];
-		der = (c==7)?-1:mar[f][c+1];
+		der = (c==numColumnas)?-1:mar[f][c+1];
     	if (arr*aba*izq*der<0) return -2;
     	if (izq*arr<0) return -2;
+    	for (int i=0;i<numFilas;i++)
+    		if (mar[f][i]==mar[f][c] || mar[i][c]==mar[f][c]) return -2;
     	return -3;
     	/*
        	for(Barco barco : barcos) {
@@ -111,7 +113,6 @@ public class Partida {
 	 * @return	        cadena con los datos del barco
 	 */	
 	public String getBarco(int idBarco) {
-        
 		return barcos.get(idBarco).toString();
 	}
 	
