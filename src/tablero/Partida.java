@@ -55,6 +55,21 @@ public class Partida {
     public int pruebaCasilla(int f, int c) {
     	disparos++;
     	if(mar[f][c]<0) return mar[f][c];
+    	Barco atacado = barcos.get(mar[f][c]);
+    	atacado.tocaBarco();
+    	if (!atacado.estaHundido()) return -2;
+    	switch (atacado.getOrientacion()){
+			case 'h':
+				for (int i=atacado.getColumnaInicial();i<atacado.getColumnaInicial()+atacado.getTamanyo();i++)
+					mar[f][i] = -3;
+				break;
+			case 'v':
+				for (int i=atacado.getFilaInicial();i<atacado.getFilaInicial()+atacado.getTamanyo();i++)
+					mar[i][c] = -3;
+				break;
+		}
+		return -3;
+    	/*
 		int arr, aba, izq, der;
 		arr = (f==0)?-1:mar[f-1][c];
 		aba = (f==numFilas)?-1:mar[f+1][c];
@@ -63,9 +78,14 @@ public class Partida {
     	if (arr*aba*izq*der<0) return -2;
     	if (izq*arr<0) return -2;
     	for (int i=0;i<numFilas;i++)
-    		if (mar[f][i]==mar[f][c] || mar[i][c]==mar[f][c]) return -2;
-    	return -3;
-    	/*
+    		if (mar[i][c]==mar[f][c] && c!=i) return -2;
+		for (int i=0;i<numColumnas;i++)
+			if (mar[f][i]==mar[f][c] && f!=i) return -2;
+    	Barco atacado = barcos.get(mar[f][c]);
+    	if (atacado.getTocadas() + 1 == atacado.getTamanyo()){
+    	    return -3;
+        }
+
        	for(Barco barco : barcos) {
        		if(barco.getFilaInicial()==f || barco.getColumnaInicial()==c) {		// Comprobamos si es el barco que buscamos
 	       		int talla=0;
