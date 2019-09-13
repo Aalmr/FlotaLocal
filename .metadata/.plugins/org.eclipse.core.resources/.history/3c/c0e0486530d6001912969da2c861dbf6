@@ -2,7 +2,6 @@ package tablero;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -179,7 +178,7 @@ public class Juego {
             int tamanyo;
             String[] cadena;
             Color color = new Color(700);	// Color para pintar el barco
-            Color colorMar = new Color(500);
+            Color colorMar = new Color(1000);
             
             for(int f=0; f<numFilas; f++) {		// Pintamos todo el mar de azul
             	for( int c=0; c<numColumnas; c++) {
@@ -203,6 +202,9 @@ public class Juego {
             		}         			
                	}
             }
+            
+            
+            
 		} // end muestraSolucion
 
 
@@ -288,19 +290,14 @@ public class Juego {
 				guiTablero.muestraSolucion();
 				
 			}
-			
-			//Iniciar partida falla
 			if(texto.equals("Nueva Partida")) {
 				System.out.println("Iniciamos partida");
-			//	guiTablero.liberaRecursos();
-				guiTablero.limpiaTablero();
 				guiTablero.dibujaTablero();
 				
 			}
 			
 			if(texto.equals("Salir")) {
-				guiTablero.liberaRecursos();
-
+				
 			}
 	
 		} // end actionPerformed

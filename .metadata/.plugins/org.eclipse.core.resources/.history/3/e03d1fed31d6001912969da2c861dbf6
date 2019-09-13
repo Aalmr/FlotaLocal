@@ -2,7 +2,6 @@ package tablero;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -292,15 +291,12 @@ public class Juego {
 			//Iniciar partida falla
 			if(texto.equals("Nueva Partida")) {
 				System.out.println("Iniciamos partida");
-			//	guiTablero.liberaRecursos();
-				guiTablero.limpiaTablero();
 				guiTablero.dibujaTablero();
 				
 			}
 			
 			if(texto.equals("Salir")) {
-				guiTablero.liberaRecursos();
-
+				
 			}
 	
 		} // end actionPerformed

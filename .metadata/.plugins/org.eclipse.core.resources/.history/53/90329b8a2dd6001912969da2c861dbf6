@@ -2,7 +2,6 @@ package tablero;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -62,7 +61,6 @@ public class Juego {
 
 		private JMenuBar barra;
 		private JMenu menu;
-		
 		private JMenuItem muestraSol,nuevaPartida,salir;
 
 		private JLabel coordH;
@@ -94,21 +92,13 @@ public class Juego {
 		 * Anyade el menu de opciones del juego y le asocia un escuchador
 		 */
 		private void anyadeMenu() {
-			MenuListener menuList= new MenuListener();
-			
 			barra=new JMenuBar();
 			menu=new JMenu("Opciones");
 			frame.setJMenuBar(barra);
 			barra.add(menu);
 			muestraSol=new JMenuItem("Mostrar solución");
-			muestraSol.addActionListener(menuList);
-						
 			nuevaPartida=new JMenuItem("Nueva Partida");
-			nuevaPartida.addActionListener(menuList);
-			
 			salir=new JMenuItem("Salir");
-			salir.addActionListener(menuList);
-			
 			menu.add(muestraSol);
 			menu.add(nuevaPartida);
 			menu.add(salir);
@@ -136,7 +126,6 @@ public class Juego {
 				panelTablero.add(new JLabel(""+letras.charAt(i)));
 				for (int j=0;j<nc;j++){
 					buttons[i][j]=new JButton();
-					buttons[i][j].addActionListener(new ButtonListener());
 					panelTablero.add(buttons[i][j]);
 				}
 				panelTablero.add(new JLabel(""+letras.charAt(i)));
@@ -179,7 +168,7 @@ public class Juego {
             int tamanyo;
             String[] cadena;
             Color color = new Color(700);	// Color para pintar el barco
-            Color colorMar = new Color(500);
+            Color colorMar = new Color(203);
             
             for(int f=0; f<numFilas; f++) {		// Pintamos todo el mar de azul
             	for( int c=0; c<numColumnas; c++) {
@@ -190,19 +179,17 @@ public class Juego {
             for(int i=0; i<solucion.length; i++) {
             	cadena = solucion[i].split("#");
             	filaIni=Integer.parseInt(cadena[0]);
-            	colIni=Integer.parseInt(cadena[1]);
+            	colIni=Integer.parseInt(cadena[0]);
             	orientacion= cadena[2].charAt(0);
-            	tamanyo= Integer.parseInt(cadena[3]);
-            	System.out.println(tamanyo);
+            	tamanyo= Integer.parseInt(cadena[0]);
+            	
             	for(int j=0; j<tamanyo; j++) {
-            		
-            		if (orientacion=='h') { 
-            			pintaBoton(buttons[filaIni][colIni++],color);
-            		}else { 
-            			pintaBoton(buttons[filaIni++][colIni],color);
-            		}         			
+            		if (orientacion=='h') { pintaBoton(buttons[filaIni][++colIni],color);}else { pintaBoton(buttons[++filaIni][colIni],color);}         			
                	}
             }
+            
+            
+            
 		} // end muestraSolucion
 
 
@@ -212,25 +199,7 @@ public class Juego {
 		 *                      "filaInicial#columnaInicial#orientacion#tamanyo"
 		 */
 		public void pintaBarcoHundido(String cadenaBarco) {
-			int filaIni;
-            int colIni;
-            char orientacion;
-            int tamanyo;
-            String[] cadena;
-            Color color = new Color(700);	// Color para pintar el barco
-            String[] barc = cadenaBarco.split("#");
-            filaIni=Integer.parseInt(barc[0]);
-        	colIni=Integer.parseInt(barc[1]);
-        	orientacion= barc[2].charAt(0);
-        	tamanyo= Integer.parseInt(barc[3]);
-        	
-        	for(int j=0; j<tamanyo; j++) {
-        		if (orientacion=='h') { pintaBoton(buttons[filaIni][++colIni],color);}else { pintaBoton(buttons[++filaIni][colIni],color);}         			
-           	}
-        	
-        	
-            
-            
+            // POR IMPLEMENTAR
 		} // end pintaBarcoHundido
 
 		/**
@@ -277,32 +246,10 @@ public class Juego {
 	 * 
 	 */
 	private class MenuListener implements ActionListener {
-		
+
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			JMenuItem boton = (JMenuItem)e.getSource();
-	        String texto = boton.getText();
-	        
-			if(texto.equals("Mostrar solución")) {
-				System.out.println("Hola");
-				guiTablero.muestraSolucion();
-				
-			}
-			
-			//Iniciar partida falla
-			if(texto.equals("Nueva Partida")) {
-				System.out.println("Iniciamos partida");
-			//	guiTablero.liberaRecursos();
-				guiTablero.limpiaTablero();
-				guiTablero.dibujaTablero();
-				
-			}
-			
-			if(texto.equals("Salir")) {
-				guiTablero.liberaRecursos();
-
-			}
-	
+            // POR IMPLEMENTAR
 		} // end actionPerformed
 
 	} // end class MenuListener
@@ -318,11 +265,10 @@ public class Juego {
 	 * de los componentes, apoyandose en los metodos putClientProperty y getClientProperty
 	 */
 	private class ButtonListener implements ActionListener {
-		private int iBoton;
-		private int jBoton;
+
 		@Override
 		public void actionPerformed(ActionEvent e) {
-            
+            // POR IMPLEMENTAR
         } // end actionPerformed
 
 	} // end class ButtonListener

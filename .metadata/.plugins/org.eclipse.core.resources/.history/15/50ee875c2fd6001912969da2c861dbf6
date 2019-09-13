@@ -2,7 +2,6 @@ package tablero;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -179,7 +178,7 @@ public class Juego {
             int tamanyo;
             String[] cadena;
             Color color = new Color(700);	// Color para pintar el barco
-            Color colorMar = new Color(500);
+            Color colorMar = new Color(203);
             
             for(int f=0; f<numFilas; f++) {		// Pintamos todo el mar de azul
             	for( int c=0; c<numColumnas; c++) {
@@ -193,16 +192,14 @@ public class Juego {
             	colIni=Integer.parseInt(cadena[1]);
             	orientacion= cadena[2].charAt(0);
             	tamanyo= Integer.parseInt(cadena[3]);
-            	System.out.println(tamanyo);
+            	
             	for(int j=0; j<tamanyo; j++) {
-            		
-            		if (orientacion=='h') { 
-            			pintaBoton(buttons[filaIni][colIni++],color);
-            		}else { 
-            			pintaBoton(buttons[filaIni++][colIni],color);
-            		}         			
+            		if (orientacion=='h') { pintaBoton(buttons[filaIni][++colIni],color);}else { pintaBoton(buttons[++filaIni][colIni],color);}         			
                	}
             }
+            
+            
+            
 		} // end muestraSolucion
 
 
@@ -220,9 +217,9 @@ public class Juego {
             Color color = new Color(700);	// Color para pintar el barco
             String[] barc = cadenaBarco.split("#");
             filaIni=Integer.parseInt(barc[0]);
-        	colIni=Integer.parseInt(barc[1]);
+        	colIni=Integer.parseInt(barc[0]);
         	orientacion= barc[2].charAt(0);
-        	tamanyo= Integer.parseInt(barc[3]);
+        	tamanyo= Integer.parseInt(barc[0]);
         	
         	for(int j=0; j<tamanyo; j++) {
         		if (orientacion=='h') { pintaBoton(buttons[filaIni][++colIni],color);}else { pintaBoton(buttons[++filaIni][colIni],color);}         			
@@ -288,19 +285,12 @@ public class Juego {
 				guiTablero.muestraSolucion();
 				
 			}
-			
-			//Iniciar partida falla
 			if(texto.equals("Nueva Partida")) {
-				System.out.println("Iniciamos partida");
-			//	guiTablero.liberaRecursos();
-				guiTablero.limpiaTablero();
-				guiTablero.dibujaTablero();
 				
 			}
 			
 			if(texto.equals("Salir")) {
-				guiTablero.liberaRecursos();
-
+				
 			}
 	
 		} // end actionPerformed
