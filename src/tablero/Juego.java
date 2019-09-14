@@ -230,11 +230,11 @@ public class Juego {
         			pintaBoton(buttons[++filaIni][colIni],color);
         		}
            	}
-        	
-        	
-            
-            
 		} // end pintaBarcoHundido
+
+		private void pintaCoord(int i, int j, Color color){
+			pintaBoton(buttons[i][j],color);
+		}
 
 		/**
 		 * Pinta un botón de un color dado
@@ -330,7 +330,19 @@ public class Juego {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			System.out.print(partida.pruebaCasilla(i,j));
+			Color color = null;
+			switch (partida.pruebaCasilla(i,j)){
+				case -1:
+					color = Color.blue;
+					break;
+				case -2:
+					color = Color.yellow;
+					break;
+				case -3:
+					color = Color.red;
+					break;
+			}
+			guiTablero.pintaCoord(i,j,color);
         } // end actionPerformed
 
 	} // end class ButtonListener
