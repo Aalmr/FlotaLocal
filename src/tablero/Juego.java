@@ -65,7 +65,6 @@ public class Juego {
 		
 		private JMenuItem muestraSol,nuevaPartida,salir;
 
-		private JLabel coordH;
 		private String letras = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
 
 		private JPanel panelTablero;
@@ -136,7 +135,7 @@ public class Juego {
 				panelTablero.add(new JLabel(""+letras.charAt(i)));
 				for (int j=0;j<nc;j++){
 					buttons[i][j]=new JButton();
-					buttons[i][j].addActionListener(new ButtonListener());
+					buttons[i][j].addActionListener(new ButtonListener(i,j));
 					panelTablero.add(buttons[i][j]);
 				}
 				panelTablero.add(new JLabel(""+letras.charAt(i)));
@@ -225,7 +224,11 @@ public class Juego {
         	tamanyo= Integer.parseInt(barc[3]);
         	
         	for(int j=0; j<tamanyo; j++) {
-        		if (orientacion=='h') { pintaBoton(buttons[filaIni][++colIni],color);}else { pintaBoton(buttons[++filaIni][colIni],color);}         			
+        		if (orientacion=='h') {
+        			pintaBoton(buttons[filaIni][++colIni],color);
+        		}else {
+        			pintaBoton(buttons[++filaIni][colIni],color);
+        		}
            	}
         	
         	
@@ -318,11 +321,16 @@ public class Juego {
 	 * de los componentes, apoyandose en los metodos putClientProperty y getClientProperty
 	 */
 	private class ButtonListener implements ActionListener {
-		private int iBoton;
-		private int jBoton;
+		private int i;
+		private int j;
+		public ButtonListener(int i, int j){
+			this.i=i;
+			this.j=j;
+		}
+
 		@Override
 		public void actionPerformed(ActionEvent e) {
-            
+			System.out.print(partida.pruebaCasilla(i,j));
         } // end actionPerformed
 
 	} // end class ButtonListener
