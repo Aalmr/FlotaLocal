@@ -54,75 +54,26 @@ public class Partida {
 
     public int pruebaCasilla(int f, int c) {
     	disparos++;
-    	if(mar[f][c]<0) return mar[f][c];
+    	int id = mar[f][c];
+    	if(id<0) return id;
     	Barco atacado = barcos.get(mar[f][c]);
     	atacado.tocaBarco();
     	if (!atacado.estaHundido()) return -2;
-    	switch (atacado.getOrientacion()){
-			case 'h':
-				for (int i=atacado.getColumnaInicial();i<atacado.getColumnaInicial()+atacado.getTamanyo();i++)
-					mar[f][i] = -3;
-				break;
-			case 'v':
-				for (int i=atacado.getFilaInicial();i<atacado.getFilaInicial()+atacado.getTamanyo();i++)
-					mar[i][c] = -3;
-				break;
-		}
+    	int x=atacado.getColumnaInicial();
+    	int y=atacado.getFilaInicial();
+    	hundeBarco(atacado.getOrientacion()=='h',x,y,atacado.getTamanyo());
+    	String cadena = getBarco(id);
 		return -3;
-    	/*
-		int arr, aba, izq, der;
-		arr = (f==0)?-1:mar[f-1][c];
-		aba = (f==numFilas)?-1:mar[f+1][c];
-		izq = (c==0)?-1:mar[f][c-1];
-		der = (c==numColumnas)?-1:mar[f][c+1];
-    	if (arr*aba*izq*der<0) return -2;
-    	if (izq*arr<0) return -2;
-    	for (int i=0;i<numFilas;i++)
-    		if (mar[i][c]==mar[f][c] && c!=i) return -2;
-		for (int i=0;i<numColumnas;i++)
-			if (mar[f][i]==mar[f][c] && f!=i) return -2;
-    	Barco atacado = barcos.get(mar[f][c]);
-    	if (atacado.getTocadas() + 1 == atacado.getTamanyo()){
-    	    return -3;
-        }
-
-       	for(Barco barco : barcos) {
-       		if(barco.getFilaInicial()==f || barco.getColumnaInicial()==c) {		// Comprobamos si es el barco que buscamos
-	       		int talla=0;
-	       		int col;
-	       		int fil;
-	       		
-	    		char orienta = barco.getOrientacion();
-	
-	       		fil=barco.getFilaInicial();
-	       		col = barco.getColumnaInicial();
-	       		
-	       		talla=0;
-	       		while(talla<=barco.getTamanyo()) {
-	       			if(col==c && fil==f) {
-	       				mar[f][c]=-1;
-	       				barco.tocaBarco();
-	       				if(barco.getTocadas()!=barco.getTamanyo()) return -1;
-	       			}
-	       			talla++;
-	       			if(orienta == 'h') col++;
-	   				else fil++;
-	       		}
-	       		
-				int cIni=barco.getFilaInicial();
-				int fIni = barco.getFilaInicial();
-				talla=0;
-				while(talla<=barco.getTamanyo()) {
-					mar[cIni][fIni]=-2; // Está hundido
-					talla++;
-					if(barco.getOrientacion()=='h') cIni++;
-					else fIni++;
-				}
-				return -2;
-       		}
-		}
-		*/
     }
+
+    private void hundeBarco(boolean esHorizontal, int x, int y,int tamanyo){
+    	if (esHorizontal)
+			for (int i=0;i<tamanyo;i++)
+				mar[x][y+i]=-3;
+		else
+			for (int i=0;i<tamanyo;i++)
+				mar[x+i][y]=-3;
+	}
     
     
 

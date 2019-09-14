@@ -48,7 +48,7 @@ public class Barco {
 	 * @return	valor logico indicando si se ha hundido
 	 */
 	public boolean estaHundido() {
-		return (this.tocadas == this.tamanyo);
+		return (this.tocadas >= this.tamanyo);
 	}
 
 

@@ -204,6 +204,7 @@ public class Juego {
             }
 		} // end muestraSolucion
 
+		//private void daCodigo()
 
 		/**
 		 * Pinta un barco como hundido en el tablero
@@ -330,19 +331,18 @@ public class Juego {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			Color color = null;
 			switch (partida.pruebaCasilla(i,j)){
 				case -1:
-					color = Color.blue;
+					guiTablero.pintaCoord(i,j,Color.blue);
 					break;
 				case -2:
-					color = Color.yellow;
+					guiTablero.pintaCoord(i,j,Color.yellow);
 					break;
 				case -3:
-					color = Color.red;
+					guiTablero.pintaCoord(i,j,Color.red);
 					break;
 			}
-			guiTablero.pintaCoord(i,j,color);
+
         } // end actionPerformed
 
 	} // end class ButtonListener
