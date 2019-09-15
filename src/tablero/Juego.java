@@ -301,7 +301,7 @@ public class Juego {
 			//Iniciar partida falla
 			if(texto.equals("Nueva Partida")) {
 				System.out.println("Iniciamos partida");
-				
+								;
 				guiTablero.limpiaTablero();
 				for(int i=0;i<guiTablero.numFilas;i++) {
 					for(int j=0; j<guiTablero.numColumnas;j++) {
@@ -353,6 +353,8 @@ public class Juego {
 					break;
 				case -2:
 					guiTablero.pintaCoord(i,j,Color.yellow);
+					break;
+				case -3:
 					break;
 				default:
 					guiTablero.pintaBarcoHundido(partida.getBarco(id));

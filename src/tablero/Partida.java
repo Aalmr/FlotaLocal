@@ -53,14 +53,13 @@ public class Partida {
 	//TODO Comprobar método y se puede sintetizar
 
     public int pruebaCasilla(int f, int c) {
-
     	disparos++;
     	int id = mar[f][c];
+    	System.out.println("Houston");
     	if(id<0) return id;
-    	
+    	System.out.println("Tenemos un problema");
     	Barco atacado = barcos.get(mar[f][c]);
     	atacado.tocaBarco();
-    	
     	if (!atacado.estaHundido()) {
     		mar[f][c]=-2;
     		return -2;
@@ -69,24 +68,17 @@ public class Partida {
     	int y=atacado.getFilaInicial();
     	
     	hundeBarco(atacado.getOrientacion()=='H',x,y,atacado.getTamanyo());
-    	//String cadena = getBarco(id);
- 
     	return id;
-    	
-    	
-    	
     }
 
     private void hundeBarco(boolean esHorizontal, int x, int y,int tamanyo){
     	if (esHorizontal)
 			for (int i=0;i<tamanyo;i++)
-				mar[x][y+i]=-3;
+				mar[y][x+i]=-3;
 		else
 			for (int i=0;i<tamanyo;i++)
-				mar[x+i][y]=-3;
+				mar[y+i][x]=-3;
 	}
-    
-    
 
 	/**
 	 * Devuelve una cadena con los datos de un barco dado: filIni, colIni, orientacion, tamanyo
