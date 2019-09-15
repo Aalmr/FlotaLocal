@@ -177,12 +177,14 @@ public class Juego {
             char orientacion;
             int tamanyo;
             String[] cadena;
-            Color color = new Color(700);	// Color para pintar el barco
-            Color colorMar = new Color(500);
+            Color color = new Color(255,0,0);	// Color para pintar el barco
+            Color colorMar = new Color(0,0,255);
             
             for(int f=0; f<numFilas; f++) {		// Pintamos todo el mar de azul
             	for( int c=0; c<numColumnas; c++) {
+            		buttons[f][c].setEnabled(false);
             		pintaBoton(buttons[f][c],colorMar);
+            		
             	}
             }
             
@@ -192,14 +194,13 @@ public class Juego {
             	colIni=Integer.parseInt(cadena[1]);
             	orientacion= cadena[2].charAt(0);
             	tamanyo= Integer.parseInt(cadena[3]);
-            	System.out.println(tamanyo);
-            	for(int j=0; j<tamanyo; j++) {
-            		
-            		if (orientacion=='h') { 
+            	
+            	for(int j=0; j<tamanyo; j++) {        		
+            		if (orientacion=='H') { 
             			pintaBoton(buttons[filaIni][colIni++],color);
             		}else { 
             			pintaBoton(buttons[filaIni++][colIni],color);
-            		}         			
+            		}
                	}
             }
 		} // end muestraSolucion
@@ -216,8 +217,11 @@ public class Juego {
             int colIni;
             char orientacion;
             int tamanyo;
+            
+            quedan--;
+            
             String[] cadena;
-            Color color = new Color(700);	// Color para pintar el barco
+            Color color = new Color(255,0,0);	// Color para pintar el barco
             String[] barc = cadenaBarco.split("#");
             filaIni=Integer.parseInt(barc[0]);
         	colIni=Integer.parseInt(barc[1]);
@@ -225,10 +229,10 @@ public class Juego {
         	tamanyo= Integer.parseInt(barc[3]);
         	
         	for(int j=0; j<tamanyo; j++) {
-        		if (orientacion=='h') {
-        			pintaBoton(buttons[filaIni][++colIni],color);
+        		if (orientacion=='H') {
+        			pintaBoton(buttons[filaIni][colIni++],color);
         		}else {
-        			pintaBoton(buttons[++filaIni][colIni],color);
+        			pintaBoton(buttons[filaIni++][colIni],color);
         		}
            	}
 		} // end pintaBarcoHundido
@@ -288,7 +292,8 @@ public class Juego {
 	        String texto = boton.getText();
 	        
 			if(texto.equals("Mostrar solución")) {
-				System.out.println("Hola");
+				System.out.println("Mostrar solucion");
+				
 				guiTablero.muestraSolucion();
 				
 			}
@@ -296,13 +301,22 @@ public class Juego {
 			//Iniciar partida falla
 			if(texto.equals("Nueva Partida")) {
 				System.out.println("Iniciamos partida");
-			//	guiTablero.liberaRecursos();
+				
 				guiTablero.limpiaTablero();
-				guiTablero.dibujaTablero();
+				for(int i=0;i<guiTablero.numFilas;i++) {
+					for(int j=0; j<guiTablero.numColumnas;j++) {
+						guiTablero.buttons[i][j].setEnabled(true);
+					}
+				}
+				partida = new Partida(NUMFILAS, NUMCOLUMNAS, NUMBARCOS);
+		
 				
 			}
 			
 			if(texto.equals("Salir")) {
+				System.out.println("Salimos");
+				
+				
 				guiTablero.liberaRecursos();
 
 			}
@@ -331,17 +345,22 @@ public class Juego {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			switch (partida.pruebaCasilla(i,j)){
+			disparos++;
+			int id=partida.pruebaCasilla(i,j);		
+			switch (id){
 				case -1:
 					guiTablero.pintaCoord(i,j,Color.blue);
 					break;
 				case -2:
 					guiTablero.pintaCoord(i,j,Color.yellow);
 					break;
-				case -3:
-					guiTablero.pintaCoord(i,j,Color.red);
+				default:
+					guiTablero.pintaBarcoHundido(partida.getBarco(id));
 					break;
+
 			}
+			guiTablero.cambiaEstado("Disparos: "+disparos+" Barcos restantes: "+quedan);
+
 
         } // end actionPerformed
 

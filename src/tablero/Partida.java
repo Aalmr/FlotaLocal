@@ -53,17 +53,28 @@ public class Partida {
 	//TODO Comprobar método y se puede sintetizar
 
     public int pruebaCasilla(int f, int c) {
+
     	disparos++;
     	int id = mar[f][c];
     	if(id<0) return id;
+    	
     	Barco atacado = barcos.get(mar[f][c]);
     	atacado.tocaBarco();
-    	if (!atacado.estaHundido()) return -2;
+    	
+    	if (!atacado.estaHundido()) {
+    		mar[f][c]=-2;
+    		return -2;
+    	}	
     	int x=atacado.getColumnaInicial();
     	int y=atacado.getFilaInicial();
-    	hundeBarco(atacado.getOrientacion()=='h',x,y,atacado.getTamanyo());
-    	String cadena = getBarco(id);
-		return -3;
+    	
+    	hundeBarco(atacado.getOrientacion()=='H',x,y,atacado.getTamanyo());
+    	//String cadena = getBarco(id);
+ 
+    	return id;
+    	
+    	
+    	
     }
 
     private void hundeBarco(boolean esHorizontal, int x, int y,int tamanyo){
@@ -95,9 +106,17 @@ public class Partida {
 	// TODO Comprobar si es eto lo que hay que hacer
 	public String[] getSolucion() {
         String[] vBarco= new String[barcos.size()];
+        String barco;
+        String[] cambiaBarco;
 		for(int i =0; i<vBarco.length;i++) {
-			vBarco[i]=getBarco(i);
+			barco=getBarco(i);
+			vBarco[i]=barco;
+			/*cambiaBarco=barco.split("#");
+			int ini=Integer.parseInt(cambiaBarco[0]);
+			int fin=Integer.parseInt(s)*/
+			
 		}
+		
 		return vBarco;
 	}
     
