@@ -182,7 +182,6 @@ public class Juego {
             
             for(int f=0; f<numFilas; f++) {		// Pintamos todo el mar de azul
             	for( int c=0; c<numColumnas; c++) {
-            		buttons[f][c].setEnabled(false);
             		pintaBoton(buttons[f][c],colorMar);
             		
             	}
@@ -201,6 +200,7 @@ public class Juego {
             		}else { 
             			pintaBoton(buttons[filaIni++][colIni],color);
             		}
+            		
                	}
             }
 		} // end muestraSolucion
@@ -221,6 +221,14 @@ public class Juego {
             quedan--;
 
             Color color = Color.red;	// Color para pintar el barco
+
+            if(quedan==0) {
+            	System.out.println("hola buenas tardes");
+            	cambiaEstado("GAME OVER en "+disparos+" disparos");
+            }
+            
+            String[] cadena;
+
             String[] barc = cadenaBarco.split("#");
             filaIni=Integer.parseInt(barc[0]);
         	colIni=Integer.parseInt(barc[1]);
@@ -292,30 +300,25 @@ public class Juego {
 	        
 			if(texto.equals("Mostrar solución")) {
 				System.out.println("Mostrar solucion");
-				
 				guiTablero.muestraSolucion();
 				
 			}
 			
-			//Iniciar partida falla
 			if(texto.equals("Nueva Partida")) {
 				System.out.println("Iniciamos partida");
 				quedan = 6;
 				disparos = 0;
 				guiTablero.limpiaTablero();
-				for(int i=0;i<guiTablero.numFilas;i++) {
-					for (int j = 0; j < guiTablero.numColumnas; j++) {
-						guiTablero.buttons[i][j].setEnabled(true);
-					}
-				}
+
 				partida = new Partida(NUMFILAS, NUMCOLUMNAS, NUMBARCOS);
-				guiTablero.cambiaEstado("Disparos: "+disparos+" Barcos restantes: "+quedan);
+
+				disparos=0;
+				quedan = NUMBARCOS;
+				guiTablero.cambiaEstado("Intentos: "+disparos+"  Barcos restantes: "+quedan);
 			}
 			
 			if(texto.equals("Salir")) {
 				System.out.println("Salimos");
-				
-				
 				guiTablero.liberaRecursos();
 
 
@@ -361,13 +364,13 @@ public class Juego {
 					break;
 
 			}
-			guiTablero.cambiaEstado("Disparos: "+disparos+" Barcos restantes: "+quedan);
+			guiTablero.cambiaEstado("Disparos: "+disparos+"	 Barcos restantes: "+quedan);
 
 
         } // end actionPerformed
 
 	} // end class ButtonListener
 
+	}
 
-
-} // end class Juego
+ // end class Juego

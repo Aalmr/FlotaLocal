@@ -55,7 +55,13 @@ public class Partida {
     public int pruebaCasilla(int f, int c) {
     	disparos++;
     	int id = mar[f][c];
+
+    	System.out.println("Houston");
+    	
     	if(id<0) return id;
+    	
+    	System.out.println("Tenemos un problema");
+    	
     	Barco atacado = barcos.get(mar[f][c]);
     	atacado.tocaBarco();
     	if (!atacado.estaHundido()) {
@@ -100,11 +106,15 @@ public class Partida {
         String[] cambiaBarco;
 		for(int i =0; i<vBarco.length;i++) {
 			barco=getBarco(i);
-			vBarco[i]=barco;
-			/*cambiaBarco=barco.split("#");
-			int ini=Integer.parseInt(cambiaBarco[0]);
-			int fin=Integer.parseInt(s)*/
-			
+			vBarco[i]=barco;		
+		}
+		
+		for(int i=0;i<mar.length;i++) {
+			for(int j=0;j<mar[0].length;j++) {
+				if(mar[i][j]>=0){
+					mar[i][j]=-3;
+				}
+			}	
 		}
 		
 		return vBarco;
