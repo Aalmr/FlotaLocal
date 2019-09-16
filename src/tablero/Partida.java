@@ -103,7 +103,6 @@ public class Partida {
 	public String[] getSolucion() {
         String[] vBarco= new String[barcos.size()];
         String barco;
-        String[] cambiaBarco;
 		for(int i =0; i<vBarco.length;i++) {
 			barco=getBarco(i);
 			vBarco[i]=barco;		

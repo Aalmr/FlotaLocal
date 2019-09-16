@@ -222,13 +222,12 @@ public class Juego {
 
             Color color = Color.red;	// Color para pintar el barco
 
+            //TODO No funciona
             if(quedan==0) {
             	System.out.println("hola buenas tardes");
             	cambiaEstado("GAME OVER en "+disparos+" disparos");
             }
             
-            String[] cadena;
-
             String[] barc = cadenaBarco.split("#");
             filaIni=Integer.parseInt(barc[0]);
         	colIni=Integer.parseInt(barc[1]);
