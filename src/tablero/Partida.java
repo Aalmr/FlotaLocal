@@ -55,9 +55,7 @@ public class Partida {
     public int pruebaCasilla(int f, int c) {
     	disparos++;
     	int id = mar[f][c];
-    	System.out.println("Houston");
     	if(id<0) return id;
-    	System.out.println("Tenemos un problema");
     	Barco atacado = barcos.get(mar[f][c]);
     	atacado.tocaBarco();
     	if (!atacado.estaHundido()) {

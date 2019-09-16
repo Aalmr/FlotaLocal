@@ -177,8 +177,8 @@ public class Juego {
             char orientacion;
             int tamanyo;
             String[] cadena;
-            Color color = new Color(255,0,0);	// Color para pintar el barco
-            Color colorMar = new Color(0,0,255);
+            Color color = Color.red;	// Color para pintar el barco
+            Color colorMar = Color.blue;
             
             for(int f=0; f<numFilas; f++) {		// Pintamos todo el mar de azul
             	for( int c=0; c<numColumnas; c++) {
@@ -219,9 +219,8 @@ public class Juego {
             int tamanyo;
             
             quedan--;
-            
-            String[] cadena;
-            Color color = new Color(255,0,0);	// Color para pintar el barco
+
+            Color color = Color.red;	// Color para pintar el barco
             String[] barc = cadenaBarco.split("#");
             filaIni=Integer.parseInt(barc[0]);
         	colIni=Integer.parseInt(barc[1]);
@@ -301,16 +300,16 @@ public class Juego {
 			//Iniciar partida falla
 			if(texto.equals("Nueva Partida")) {
 				System.out.println("Iniciamos partida");
-								;
+				quedan = 6;
+				disparos = 0;
 				guiTablero.limpiaTablero();
 				for(int i=0;i<guiTablero.numFilas;i++) {
-					for(int j=0; j<guiTablero.numColumnas;j++) {
+					for (int j = 0; j < guiTablero.numColumnas; j++) {
 						guiTablero.buttons[i][j].setEnabled(true);
 					}
 				}
 				partida = new Partida(NUMFILAS, NUMCOLUMNAS, NUMBARCOS);
-		
-				
+				guiTablero.cambiaEstado("Disparos: "+disparos+" Barcos restantes: "+quedan);
 			}
 			
 			if(texto.equals("Salir")) {
@@ -318,6 +317,7 @@ public class Juego {
 				
 				
 				guiTablero.liberaRecursos();
+
 
 			}
 	
