@@ -167,7 +167,7 @@ public class Juego {
 		 * Muestra la solucion de la partida y marca la partida como finalizada
 		 */
 		
-		// TODO Cómo hacer que no se pueda continuar la partida
+		
 		
 		public void muestraSolucion() {
             String[] solucion = partida.getSolucion();
@@ -180,7 +180,7 @@ public class Juego {
             Color colorMar = Color.blue;
             
             
-            // TODO Algo más eficiente?
+            
             for(int f=0; f<numFilas; f++) {		// Pintamos todo el mar de azul
             	for( int c=0; c<numColumnas; c++) {
             		pintaBoton(buttons[f][c],colorMar);
@@ -200,7 +200,6 @@ public class Juego {
             		}else { 
             			pintaBoton(buttons[filaIni++][colIni],color);
             		}
-            		
                	}
             }
 		} // end muestraSolucion
@@ -294,13 +293,12 @@ public class Juego {
 	        
 			if(texto.equals("Mostrar solución")) {
 				fin=true;
-				System.out.println("Mostrar solucion");
 				guiTablero.muestraSolucion();
 				
 			}
 			
 			if(texto.equals("Nueva Partida")) {
-				System.out.println("Iniciamos partida");
+				System.out.println("Iniciamos nueva partida");
 				quedan = 6;
 				disparos = 0;
 				fin = false;
@@ -310,7 +308,7 @@ public class Juego {
 
 				disparos=0;
 				quedan = NUMBARCOS;
-				guiTablero.cambiaEstado("Intentos: "+disparos+"  Barcos restantes: "+quedan);
+				guiTablero.cambiaEstado("Disparos: "+disparos+"  Barcos restantes: "+quedan);
 			}
 			
 			if(texto.equals("Salir")) {

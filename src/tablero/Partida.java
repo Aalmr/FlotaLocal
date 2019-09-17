@@ -95,7 +95,6 @@ public class Partida {
 	 * @return	vector de cadenas, una por barco con la informacion de getBarco
 	 */	
 	
-	// TODO Comprobar si es eto lo que hay que hacer
 	public String[] getSolucion() {
         String[] vBarco= new String[barcos.size()];
         String barco;
@@ -104,13 +103,6 @@ public class Partida {
 			vBarco[i]=barco;		
 		}
 		
-		for(int i=0;i<mar.length;i++) {
-			for(int j=0;j<mar[0].length;j++) {
-				if(mar[i][j]>=0){
-					mar[i][j]=-3;
-				}
-			}	
-		}
 		
 		return vBarco;
 	}
