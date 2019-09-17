@@ -11,7 +11,7 @@ import java.lang.*;
 import javax.swing.*;
 
 public class Juego {
-
+	public boolean fin = false;
 	/**
 	 * Implementa el juego 'Hundir la flota' mediante una interfaz gráfica (GUI)
 	 */
@@ -302,6 +302,7 @@ public class Juego {
 				System.out.println("Iniciamos partida");
 				quedan = 6;
 				disparos = 0;
+				fin = false;
 				guiTablero.limpiaTablero();
 
 				partida = new Partida(NUMFILAS, NUMCOLUMNAS, NUMBARCOS);
@@ -342,28 +343,32 @@ public class Juego {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			disparos++;
-			int id=partida.pruebaCasilla(i,j);		
-			switch (id){
-				case -1:
-					guiTablero.pintaCoord(i,j,Color.blue);
-					break;
-				case -2:
-					guiTablero.pintaCoord(i,j,Color.yellow);
-					break;
-				case -3:
-					break;
-				default:
-					guiTablero.pintaBarcoHundido(partida.getBarco(id));
-					break;
+			if (!fin){
+				disparos++;
+				int id=partida.pruebaCasilla(i,j);
+				switch (id){
+					case -1:
+						guiTablero.pintaCoord(i,j,Color.blue);
+						break;
+					case -2:
+						guiTablero.pintaCoord(i,j,Color.yellow);
+						break;
+					case -3:
+						break;
+					default:
+						guiTablero.pintaBarcoHundido(partida.getBarco(id));
+						break;
 
+				}
+
+				if (quedan==0){
+					guiTablero.cambiaEstado("GAME OVER en "+disparos+" disparos");
+					fin = true;
+				}
+
+				else
+					guiTablero.cambiaEstado("Disparos: "+disparos+"	 Barcos restantes: "+quedan);
 			}
-			
-			if(quedan==0) {
-            	guiTablero.cambiaEstado("GAME OVER en "+disparos+" disparos");			
-			}else
-				guiTablero.cambiaEstado("Disparos: "+disparos+"	 Barcos restantes: "+quedan);
-
 
         } // end actionPerformed
 
