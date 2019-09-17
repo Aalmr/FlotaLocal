@@ -111,7 +111,6 @@ public class Juego {
 			menu.add(muestraSol);
 			menu.add(nuevaPartida);
 			menu.add(salir);
-			//TODO FALTA ASOCIAR ESCUCHADOR
 		} // end anyadeMenu
 
 		/**
@@ -180,10 +179,11 @@ public class Juego {
             Color color = Color.red;	// Color para pintar el barco
             Color colorMar = Color.blue;
             
+            
+            // TODO Algo más eficiente?
             for(int f=0; f<numFilas; f++) {		// Pintamos todo el mar de azul
             	for( int c=0; c<numColumnas; c++) {
             		pintaBoton(buttons[f][c],colorMar);
-            		
             	}
             }
             
@@ -222,12 +222,7 @@ public class Juego {
 
             Color color = Color.red;	// Color para pintar el barco
 
-            //TODO No funciona
-            if(quedan==0) {
-            	System.out.println("hola buenas tardes");
-            	cambiaEstado("GAME OVER en "+disparos+" disparos");
-            }
-            
+          
             String[] barc = cadenaBarco.split("#");
             filaIni=Integer.parseInt(barc[0]);
         	colIni=Integer.parseInt(barc[1]);
@@ -363,7 +358,11 @@ public class Juego {
 					break;
 
 			}
-			guiTablero.cambiaEstado("Disparos: "+disparos+"	 Barcos restantes: "+quedan);
+			
+			if(quedan==0) {
+            	guiTablero.cambiaEstado("GAME OVER en "+disparos+" disparos");			
+			}else
+				guiTablero.cambiaEstado("Disparos: "+disparos+"	 Barcos restantes: "+quedan);
 
 
         } // end actionPerformed

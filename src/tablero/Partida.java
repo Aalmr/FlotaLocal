@@ -50,28 +50,25 @@ public class Partida {
 	 * @return		resultado de marcar la casilla: AGUA, ya TOCADO, ya HUNDIDO, identidad del barco recien hundido
 	 */	
 	
-	//TODO Comprobar método y se puede sintetizar
+	
 
     public int pruebaCasilla(int f, int c) {
     	disparos++;
     	int id = mar[f][c];
-
-    	System.out.println("Houston");
+    	// TODO He quitado un return
     	
-    	if(id<0) return id;
-    	
-    	System.out.println("Tenemos un problema");
-    	
-    	Barco atacado = barcos.get(mar[f][c]);
-    	atacado.tocaBarco();
-    	if (!atacado.estaHundido()) {
-    		mar[f][c]=-2;
-    		return -2;
-    	}	
-    	int x=atacado.getColumnaInicial();
-    	int y=atacado.getFilaInicial();
-    	
-    	hundeBarco(atacado.getOrientacion()=='H',x,y,atacado.getTamanyo());
+    	if(id>=0) {
+	    	Barco atacado = barcos.get(mar[f][c]);
+	    	atacado.tocaBarco();
+	    	if (!atacado.estaHundido()) {
+	    		mar[f][c]=-2;
+	    		return -2;
+	    	}	
+	    	int x=atacado.getColumnaInicial();
+	    	int y=atacado.getFilaInicial();
+	    	
+	    	hundeBarco(atacado.getOrientacion()=='H',x,y,atacado.getTamanyo());
+    	}
     	return id;
     }
 
