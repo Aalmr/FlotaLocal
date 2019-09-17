@@ -55,7 +55,6 @@ public class Partida {
     public int pruebaCasilla(int f, int c) {
     	disparos++;
     	int id = mar[f][c];
-    	// TODO He quitado un return
     	
     	if(id>=0) {
 	    	Barco atacado = barcos.get(mar[f][c]);

@@ -293,6 +293,7 @@ public class Juego {
 	        String texto = boton.getText();
 	        
 			if(texto.equals("Mostrar solución")) {
+				fin=true;
 				System.out.println("Mostrar solucion");
 				guiTablero.muestraSolucion();
 				
@@ -365,7 +366,6 @@ public class Juego {
 					guiTablero.cambiaEstado("GAME OVER en "+disparos+" disparos");
 					fin = true;
 				}
-
 				else
 					guiTablero.cambiaEstado("Disparos: "+disparos+"	 Barcos restantes: "+quedan);
 			}
